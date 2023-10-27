@@ -31,7 +31,7 @@ resource "aws_instance" "main" {
   ami           = nonsensitive(data.aws_ssm_parameter.amzn2_linux.value)
   instance_type = var.instance_type
   #subnet_id    = var.public_subnets[count.index]
-  subnet_id     = data.tfe_outputs.networkin.nonsensitive_values.public_subnets[count.index]
+  subnet_id = data.tfe_outputs.networkin.nonsensitive_values.public_subnets[count.index]
   vpc_security_group_ids = [
     aws_security_group.webapp_http_inbound_sg.id,
     aws_security_group.webapp_ssh_inbound_sg.id,
@@ -100,7 +100,7 @@ resource "aws_lb" "main" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.webapp_http_inbound_sg.id]
   #subnets           = var.public_subnets
-  subnets            = data.tfe_outputs.networkin.nonsensitive_values.public_subnets
+  subnets = data.tfe_outputs.networkin.nonsensitive_values.public_subnets
 
   enable_deletion_protection = false
 
@@ -124,7 +124,7 @@ resource "aws_lb_target_group" "main" {
   target_type = "instance"
   protocol    = "HTTP"
   #vpc_id     = var.vpc_id
-  vpc_id      = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
+  vpc_id = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
 }
 
 resource "aws_alb_target_group_attachment" "main" {
