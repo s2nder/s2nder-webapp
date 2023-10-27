@@ -44,7 +44,7 @@ variable "tfe_oraganization" {
 
 variable "tfe_workspace_name" {
   type        = string
-  description = "(Requered) Name of networking workspace to get information."
+  description = "(Requered) Name of networking workspace to get information!"
 }
 
 /*
