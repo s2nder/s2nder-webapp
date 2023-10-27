@@ -45,6 +45,7 @@ resource "aws_instance" "main" {
   })
 
   # Provisioner Stuff
+  /*
   connection {
     type        = "ssh"
     user        = "ec2-user"
@@ -65,7 +66,13 @@ resource "aws_instance" "main" {
     ]
     on_failure = continue
   }
+  */
 
+  user_data_replace_on_change = true
+
+  user_data = templatefile("./templates/userdata.sh", {
+    playbook_repository = var.playbook_repository
+  })
 }
 
 resource "null_resource" "webapp" {
