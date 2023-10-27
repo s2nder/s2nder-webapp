@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "ssm_access" {
     actions   = ["ssm:GetParameter"]
     resources = [aws_ssm_parameter.host_list.arn, aws_ssm_parameter.site_name.arn]
   }
-  
+
 }
 
 resource "aws_iam_policy" "ssm_access" {
