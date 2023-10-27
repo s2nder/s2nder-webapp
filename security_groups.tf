@@ -21,9 +21,9 @@ resource "aws_security_group" "webapp_http_inbound_sg" {
   }
 
   #vpc_id = var.vpc_id
-  vpc_id = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
+  vpc_id  = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
 
-  tags   = local.common_tags
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "webapp_ssh_inbound_sg" {
@@ -38,9 +38,9 @@ resource "aws_security_group" "webapp_ssh_inbound_sg" {
   }
 
   #vpc_id = var.vpc_id
-  vpc_id = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
+  vpc_id  = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
 
-  tags   = local.common_tags
+  tags = local.common_tags
 }
 
 resource "aws_security_group" "webapp_outbound_sg" {
@@ -55,7 +55,7 @@ resource "aws_security_group" "webapp_outbound_sg" {
   }
 
   #vpc_id = var.vpc_id
-  vpc_id = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
+  vpc_id  = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
 
-  tags   = local.common_tags
+  tags = local.common_tags
 }
