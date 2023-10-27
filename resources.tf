@@ -26,11 +26,11 @@ locals {
 ##################################################################################
 
 resource "aws_instance" "main" {
-  #count         = length(var.public_subnets)
+  #count        = length(var.public_subnets)
   count         = length(data.tfe_outputs.networkin.nonsensitive_values.public_subnets)
   ami           = nonsensitive(data.aws_ssm_parameter.amzn2_linux.value)
   instance_type = var.instance_type
-  #subnet_id     = var.public_subnets[count.index]
+  #subnet_id    = var.public_subnets[count.index]
   subnet_id     = data.tfe_outputs.networkin.nonsensitive_values.public_subnets[count.index]
   vpc_security_group_ids = [
     aws_security_group.webapp_http_inbound_sg.id,
@@ -99,7 +99,7 @@ resource "aws_lb" "main" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.webapp_http_inbound_sg.id]
-  #subnets            = var.public_subnets
+  #subnets           = var.public_subnets
   subnets            = data.tfe_outputs.networkin.nonsensitive_values.public_subnets
 
   enable_deletion_protection = false
@@ -123,7 +123,7 @@ resource "aws_lb_target_group" "main" {
   port        = 80
   target_type = "instance"
   protocol    = "HTTP"
-  #vpc_id      = var.vpc_id
+  #vpc_id     = var.vpc_id
   vpc_id      = data.tfe_outputs.networkin.nonsensitive_values.vpc_id
 }
 
